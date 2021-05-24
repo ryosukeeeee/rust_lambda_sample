@@ -1,0 +1,33 @@
+service: demo
+
+provider:
+  name: aws
+  runtime: rust
+  region: ap-northeast-1
+
+custom:
+# this section customizes of the default
+# serverless-rust plugin settings
+  rust:
+    # flags passed to cargo
+    cargoFlags: '--verbose'
+    # custom docker tag
+    dockerTag: '1.51'
+    #  custom docker image
+    dockerImage: 'softprops/lambda-rust'
+
+plugins:
+  # this registers the plugin
+  # with serverless
+  - serverless-rust
+# creates one artifact for each function
+
+package:
+  individually: true
+
+functions:
+  test:
+    # handler value syntax is `{cargo-package-name}.{bin-name}`
+    # or `{cargo-package-name}` for short when you are building a
+    # default bin for a given package.
+    handler: rust_lambda_sample
