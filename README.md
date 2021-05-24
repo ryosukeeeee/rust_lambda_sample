@@ -111,7 +111,7 @@ docker build -t softprops/lambda-rust:1.51 .
 まずはこのリポジトリをクローンしてください。`main.rs`は[aws-lambda-rust-runtime/basic.rs at master · awslabs/aws-lambda-rust-runtime](https://github.com/awslabs/aws-lambda-rust-runtime/blob/master/lambda-runtime/examples/basic.rs)をお借りしました。
 
 ```sh
-git clone 
+git clone https://github.com/ryosukeeeee/rust_lambda_sample.git
 cd rust_lambda_sample
 ```
 
