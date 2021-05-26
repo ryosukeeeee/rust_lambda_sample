@@ -152,13 +152,37 @@ cat output.json
 ```
 
 ### serverless framework plugin
-serverless frameworkのプラグインが存在する。
+Rustアプリ用のserverless frameworkのプラグインが存在する。
 
 [softprops/serverless-rust: ⚡ 🦀 a serverless framework plugin for rustlang applications](https://github.com/softprops/serverless-rust)
 
-内部ではソースコードのビルドに`softprops/lambda-rust:latest`を使用している。
-上述した理由と同じ理由でコンパイルエラーが発生してビルド出来ない。（2021年5月24日現在）
-ソースコードのビルドに使用するDockerイメージを指定できるので、ローカルのRust 1.51版を指定したらデプロイできるかも（未検証）
+serverless-rustの内部ではソースコードのビルドに`softprops/lambda-rust:latest`を使用している。
+npmで配布されているserverless-rustの最新バージョン（2021年5月26日時点）は0.3.8です。
+ソースコードのビルドに使用するDockerイメージをカスタマイズして`softprops/lambda-rust:1.51`を使用すればデプロイすることは可能だが、実行時にエラーが発生します。
+
+serverless-rustの0.3.8はランタイムにAmazon Linuxを設定してしまうのがエラーの原因です。
+`softprops/lambda-rust:1.51`で生成された実行コードはAmazon Linux 2版です。
+
+
+serverless-rustのGitHubリポジトリでは開発が進んでおり、[masterブランチ](https://github.com/softprops/serverless-rust/tree/ebe43ceacfb7f770569e98e3dfb4bbb6eba0d88d)（commit sha: ebe43ceacfb7f770569e98e3dfb4bbb6eba0d88d）を使うとランタイムにAmazon Linux 2を設定することができる。
+
+#### serverless-rustのGitHubリポジトリからコミットを指定してインストール
+
+```sh
+npm i -D https://github.com/softprops/serverless-rust#ebe43ceacfb7f770569e98e3dfb4bbb6eba0d88d
+```
+
+
+#### ビルドに使うDockerイメージをカスタマイズ
+
+```yml
+custom:
+  rust:
+    # custom docker tag
+    dockerTag: '1.51'
+    #  custom docker image
+    dockerImage: 'softprops/lambda-rust'
+```
 
 
 ## 参考資料
