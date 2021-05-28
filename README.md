@@ -96,13 +96,22 @@ Rust 1.46.0から`const fn`の中で`match`が使えるようになった。
 [lambda-rust](https://github.com/softprops/lambda-rust)のGitHubのmasterブランチはRust 1.51に対応しています。
 （commit sha: `0280da0821c4671af1554757bbc7adb59dbfa0d4`）
 
-ということで、ローカルにクローンしてイメージをビルドします。
+ということで、以下の1.もしくは2.の方法でイメージをビルドします。
+
+1. ローカルにリポジトリをクローンしてイメージをビルドする方法
 
 ```sh
 git clone https://github.com/softprops/lambda-rust.git
 cd lambda-rust
 docker build -t softprops/lambda-rust:1.51 .
 ```
+
+2. GitHubのURLを指定してイメージをビルドする方法
+
+```sh
+docker build -t softprops/lambda-rust:1.51 https://github.com/softprops/lambda-rust.git#e6137ddbac36d104236407eb537c6c03a16a30fa
+```
+
 
 ### lambda関数をビルド
 
